@@ -14,8 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ControleFinanceiro.BLL\ControleFinanceiro.BLL.csproj" />
-    <ProjectReference Include="..\ControleFinanceiro.DAL\ControleFinanceiro.DAL.csproj" />
+    <ProjectReference Include="..\..\ControleFinanceiro.BLL\ControleFinanceiro.BLL.csproj" /> 
   </ItemGroup>
 
 
