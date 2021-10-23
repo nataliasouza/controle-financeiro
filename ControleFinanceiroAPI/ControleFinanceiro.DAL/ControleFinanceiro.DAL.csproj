@@ -4,4 +4,14 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+    <Folder Include="Mapping\" />
+    <Folder Include="Repositorires\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\ControleFinanceiro.BLL\ControleFinanceiro.BLL.csproj" />
+  </ItemGroup>
+
 </Project>
