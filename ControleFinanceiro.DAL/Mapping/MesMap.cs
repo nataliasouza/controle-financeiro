@@ -74,7 +74,7 @@ namespace ControleFinanceiro.DAL.Mapping
                 new Mes
                 {
                     MesId = 12,
-                    Nome = "Fevereiro"
+                    Nome = "Dezembro"
                 });
 
             builder.ToTable("Meses");
