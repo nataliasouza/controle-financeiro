@@ -165,16 +165,16 @@ namespace ControleFinanceiro.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1b55f3e4-3321-4fa9-b226-fe32dfdbe043",
-                            ConcurrencyStamp = "33badc6c-e7c2-4766-9b74-4cb1567e1990",
+                            Id = "700149fd-9cf1-4ebd-a5f8-4b32802a2082",
+                            ConcurrencyStamp = "2c438eef-1a1b-44d6-9964-2590f58c03d7",
                             Descricao = "Administrador do Sistema",
                             Name = "Administrador",
                             NormalizedName = "ADMINISTRADOR"
                         },
                         new
                         {
-                            Id = "d7258dcb-0b3b-4305-bdef-174d87829383",
-                            ConcurrencyStamp = "cdedbfb6-f6a0-4934-8130-264b12668109",
+                            Id = "a599429f-332c-4a22-b91c-469642eea4c8",
+                            ConcurrencyStamp = "82082178-8b4a-42d5-b180-44874fe5fed2",
                             Descricao = "Usuário do Sistema",
                             Name = "Usuario",
                             NormalizedName = "USUARIO"
