@@ -23,17 +23,12 @@ namespace ControleFinanceiro.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Categoria>>> GetCategorias()
         {
-            return await _context.Categorias.ToListAsync();
+            return await _context.Categorias.Include(c => c.Tipo).ToListAsync();
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Categoria>> GetCategoriaPorId(int? id)
+        public async Task<ActionResult<Categoria>> GetCategoriaPorId(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
             var categoria = await _context.Categorias
                 .Include(c => c.Tipo)
                 .FirstOrDefaultAsync(m => m.CategoriaId == id);
@@ -42,31 +37,25 @@ namespace ControleFinanceiro.API.Controllers
                 return NotFound();
             }
 
-            return (categoria);
+            return categoria;
         }
 
         [HttpPost]
         public async Task<ActionResult<Categoria>> PostCategoria(Categoria categoria)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(categoria);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return (categoria);
+            _context.Categorias.Add(categoria);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetCategoria", new {id = categoria.CategoriaId}, categoria);                        
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCategoria(int id, Categoria categoria)
+        public async Task<ActionResult> PutCategoria(int id, Categoria categoria)
         {
             if (id != categoria.CategoriaId)
             {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
+                return BadRequest();
+            }                        
                 try
                 {
                     _context.Update(categoria);
@@ -83,19 +72,12 @@ namespace ControleFinanceiro.API.Controllers
                         throw;
                     }
                 }
-                return NotFound();
-            }
-            return Ok(categoria);
+                return NoContent();           
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Categoria>> DeleteCategoria(int id)
+        {           
             var categoria = await _context.Categorias
                 .Include(c => c.Tipo)
                 .FirstOrDefaultAsync(m => m.CategoriaId == id);
@@ -104,7 +86,10 @@ namespace ControleFinanceiro.API.Controllers
                 return NotFound();
             }
 
-            return Ok(categoria);
+            _context.Categorias.Remove(categoria);
+            await _context.SaveChangesAsync();
+
+            return categoria;
         }
 
         private bool CategoriaExists(int id)
