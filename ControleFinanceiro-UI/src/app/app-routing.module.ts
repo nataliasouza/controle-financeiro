@@ -12,9 +12,8 @@ const routes: Routes = [
     path: 'categorias/novacategoria', component: NovaCategoriaComponent
   },
   {
-    path: 'categorias/atualizarcategoria', component: AtualizarCategoriaComponent
-  },
-
+    path: 'categorias/atualizarcategoria/:id', component: AtualizarCategoriaComponent
+  }
 ];
 
 @NgModule({
