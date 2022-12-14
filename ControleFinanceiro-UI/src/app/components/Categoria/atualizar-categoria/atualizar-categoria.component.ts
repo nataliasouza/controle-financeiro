@@ -13,12 +13,13 @@ import { TiposService } from 'src/app/services/tipos.service';
   styleUrls: ['./atualizar-categoria.component.css']
 })
 export class AtualizarCategoriaComponent implements OnInit {
-
+  nomeCategoria : string;
   categoria : Observable<Categoria>;
   tipos: Tipo[];
   formulario: any;
 
-  constructor(private router : Router,
+  constructor(
+    private router : Router,
     private route : ActivatedRoute,
     private tiposService : TiposService,
     private categoriasService: CategoriasService) { }
@@ -30,6 +31,7 @@ export class AtualizarCategoriaComponent implements OnInit {
     });
 
     this.categoriasService.PegarCategoriaPeloId(categoriaId).subscribe(resultado => {
+      this.nomeCategoria = resultado.nome;
       this.formulario = new FormGroup({
         categoriaId : new FormControl(resultado.categoriaId),
         nome : new FormControl(resultado.nome),
@@ -43,4 +45,7 @@ export class AtualizarCategoriaComponent implements OnInit {
     return this.formulario.controls;
   }
 
+  VoltarListagem() : void {
+    this.router.navigate(['categorias/listagemcategorias']);
+  }
 }
