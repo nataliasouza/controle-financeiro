@@ -4,7 +4,7 @@
             <mat-card-title><h3>Atualizar Categorias : {{ nomeCategoria }}</h3></mat-card-title>
         </mat-card-header>
 
-        <form [formGroup]="formulario">
+        <form [formGroup]="formulario" (ngSubmit)="EnviarFormulario()">
             <mat-card-content>
                 <div>
                     <mat-form-field class="mat-form-field">
