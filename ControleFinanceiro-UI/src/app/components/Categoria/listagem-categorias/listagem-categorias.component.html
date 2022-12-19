@@ -39,7 +39,7 @@
 
             <mat-icon>edit</mat-icon></button>
 
-        <button mat-mini-fab color="warn"><mat-icon>delete_forever</mat-icon></button>
+        <button mat-mini-fab color="warn" (click)="AbrirDialog(categoria.categoriaId, categoria.nome)"><mat-icon>delete_forever</mat-icon></button>
       </td>
     </ng-container>
 
