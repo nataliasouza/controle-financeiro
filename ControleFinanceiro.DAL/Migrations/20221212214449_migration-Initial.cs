@@ -41,7 +41,7 @@ namespace ControleFinanceiro.DAL.Migrations
                 {
                     TipoId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(maxLength: 20, nullable: false)
+                    Nome = table.Column<string>(maxLength: 40, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -104,7 +104,7 @@ namespace ControleFinanceiro.DAL.Migrations
                     CategoriaId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(maxLength: 50, nullable: false),
-                    Icone = table.Column<string>(maxLength: 15, nullable: false),
+                    Icone = table.Column<string>(maxLength: 50, nullable: false),
                     TipoId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -308,8 +308,8 @@ namespace ControleFinanceiro.DAL.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Descricao", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "24277a8d-8f78-41b4-bad3-a9bdf9af4ea1", "1865aee9-a381-4a96-b188-f111591a3f54", "Administrador do Sistema", "Administrador", "ADMINISTRADOR" },
-                    { "32bf2ffe-8a83-4997-96d3-6c61ee01538c", "dd40fbac-07b6-4437-8295-b0aa3154de1b", "Usuário do Sistema", "Usuario", "USUARIO" }
+                    { "df7464e0-7cfc-48af-bd8f-7c5f4b3143f1", "76596e33-f0f7-4188-8872-bab211df8f48", "Administrador do Sistema", "Administrador", "ADMINISTRADOR" },
+                    { "0355b08a-b564-4e74-9dbf-76e4176ae3b6", "63255598-f961-4ff7-944c-e4729a338acc", "Usuário do Sistema", "Usuario", "USUARIO" }
                 });
 
             migrationBuilder.InsertData(

@@ -70,8 +70,8 @@ namespace ControleFinanceiro.DAL.Migrations
 
                     b.Property<string>("Icone")
                         .IsRequired()
-                        .HasColumnType("nvarchar(15)")
-                        .HasMaxLength(15);
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -165,16 +165,16 @@ namespace ControleFinanceiro.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "24277a8d-8f78-41b4-bad3-a9bdf9af4ea1",
-                            ConcurrencyStamp = "1865aee9-a381-4a96-b188-f111591a3f54",
+                            Id = "df7464e0-7cfc-48af-bd8f-7c5f4b3143f1",
+                            ConcurrencyStamp = "76596e33-f0f7-4188-8872-bab211df8f48",
                             Descricao = "Administrador do Sistema",
                             Name = "Administrador",
                             NormalizedName = "ADMINISTRADOR"
                         },
                         new
                         {
-                            Id = "32bf2ffe-8a83-4997-96d3-6c61ee01538c",
-                            ConcurrencyStamp = "dd40fbac-07b6-4437-8295-b0aa3154de1b",
+                            Id = "0355b08a-b564-4e74-9dbf-76e4176ae3b6",
+                            ConcurrencyStamp = "63255598-f961-4ff7-944c-e4729a338acc",
                             Descricao = "Usuário do Sistema",
                             Name = "Usuario",
                             NormalizedName = "USUARIO"
@@ -314,8 +314,8 @@ namespace ControleFinanceiro.DAL.Migrations
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("nvarchar(20)")
-                        .HasMaxLength(20);
+                        .HasColumnType("nvarchar(40)")
+                        .HasMaxLength(40);
 
                     b.HasKey("TipoId");
 

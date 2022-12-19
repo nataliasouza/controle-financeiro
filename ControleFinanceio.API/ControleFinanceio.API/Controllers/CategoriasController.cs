@@ -46,7 +46,7 @@ namespace ControleFinanceiro.API.Controllers
             _context.Categorias.Add(categoria);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCategoria", new {id = categoria.CategoriaId}, categoria);                        
+            return CreatedAtAction("GetCategorias", new {id = categoria.CategoriaId}, categoria);                        
         }
 
         [HttpPut("{id}")]
