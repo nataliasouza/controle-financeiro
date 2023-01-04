@@ -1,5 +1,5 @@
 ﻿using ControleFinanceiro.BLL.Models;
-using ControleFinanceiro.DAL;
+using ControleFinanceiro.DAL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -11,17 +11,17 @@ namespace ControleFinanceio.API.Controllers
     [ApiController]
     public class TiposController : ControllerBase
     {
-        private readonly Context _context;
+        private readonly ITipoRepositorio _tipoRepositorio;
 
-        public TiposController(Context context)
+        public TiposController(ITipoRepositorio tipoRepositorio)
         {
-            _context = context;
+            _tipoRepositorio = tipoRepositorio; 
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Tipo>>> GetTipos()
         {
-            return await _context.Tipos.ToListAsync();
+            return await _tipoRepositorio.PegarTodos().ToListAsync();
         }
     }
 }
