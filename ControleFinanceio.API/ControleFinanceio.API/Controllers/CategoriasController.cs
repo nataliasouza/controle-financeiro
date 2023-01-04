@@ -1,5 +1,6 @@
 ﻿using ControleFinanceiro.BLL.Models;
 using ControleFinanceiro.DAL;
+using ControleFinanceiro.DAL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -13,25 +14,24 @@ namespace ControleFinanceiro.API.Controllers
     [ApiController]
     public class CategoriasController : ControllerBase
     {
-        private readonly Context _context;
+        private readonly ICategoriaRepositorio _categoriaRepositorio;
 
-        public CategoriasController(Context context)
+        public CategoriasController(ICategoriaRepositorio categoriaRepositorio)
         {
-            _context = context;
+            _categoriaRepositorio = categoriaRepositorio;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Categoria>>> GetCategorias()
         {
-            return await _context.Categorias.Include(c => c.Tipo).ToListAsync();
+            return await _categoriaRepositorio.PegarTodos().ToListAsync();
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Categoria>> GetCategoriaPorId(int id)
         {
-            var categoria = await _context.Categorias
-                .Include(c => c.Tipo)
-                .FirstOrDefaultAsync(m => m.CategoriaId == id);
+            var categoria = await _categoriaRepositorio.PegarTodosPeloId(id);
+
             if (categoria == null)
             {
                 return NotFound();
@@ -43,10 +43,9 @@ namespace ControleFinanceiro.API.Controllers
         [HttpPost]
         public async Task<ActionResult<Categoria>> PostCategoria(Categoria categoria)
         {
-            _context.Categorias.Add(categoria);
-            await _context.SaveChangesAsync();
+            await _categoriaRepositorio.Inserir(categoria);            
 
-            return CreatedAtAction("GetCategorias", new {id = categoria.CategoriaId}, categoria);                        
+            return Ok(new { messagem = $"Categoria {categoria.Nome} cadastrada com sucesso!" });
         }
 
         [HttpPut("{id}")]
@@ -55,46 +54,34 @@ namespace ControleFinanceiro.API.Controllers
             if (id != categoria.CategoriaId)
             {
                 return BadRequest();
-            }                        
-                try
-                {
-                    _context.Update(categoria);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CategoriaExists(id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return NoContent();           
+            }
+
+            else if (categoria != null)
+            
+            {
+                await _categoriaRepositorio.Atualizar(categoria);
+                return Ok(new { messagem = $"Categoria {categoria.Nome} atualizado com sucesso!" });
+            }          
+
+            return BadRequest();
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<Categoria>> DeleteCategoria(int id)
         {           
-            var categoria = await _context.Categorias
-                .Include(c => c.Tipo)
-                .FirstOrDefaultAsync(m => m.CategoriaId == id);
+            var categoria = await _categoriaRepositorio.PegarTodosPeloId(id);
+            
             if (categoria == null)
             {
                 return NotFound();
             }
 
-            _context.Categorias.Remove(categoria);
-            await _context.SaveChangesAsync();
+            await _categoriaRepositorio.Excluir(id);
 
-            return categoria;
-        }
+            return Ok(new { messagem = $"Categoria {categoria.Nome} excluída com sucesso!" });
 
-        private bool CategoriaExists(int id)
-        {
-            return _context.Categorias.Any(e => e.CategoriaId == id);
+
         }
+       
     }
 }
