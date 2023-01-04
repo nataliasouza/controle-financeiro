@@ -1,5 +1,7 @@
 using ControleFinanceiro.BLL.Models;
 using ControleFinanceiro.DAL;
+using ControleFinanceiro.DAL.Interfaces;
+using ControleFinanceiro.DAL.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +28,10 @@ namespace ControleFinanceio.API
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<Usuario, Funcao>().AddEntityFrameworkStores<Context>();
+
+            services.AddScoped<ICategoriaRepositorio, CategoriaRepositorio>();
+
+            services.AddScoped<ITipoRepositorio, TipoRepositorio>();
 
             services.AddCors();
 
